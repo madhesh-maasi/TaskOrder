@@ -1,0 +1,27 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "task-order-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/taskOrder/TaskOrderWebPart.js",
+          "manifest": "./src/webparts/taskOrder/TaskOrderWebPart.manifest.json"
+        }
+      ]
+    },
+    "insert-edit-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/insertEdit/InsertEditWebPart.js",
+          "manifest": "./src/webparts/insertEdit/InsertEditWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "TaskOrderWebPartStrings": "lib/webparts/taskOrder/loc/{locale}.js",
+    "InsertEditWebPartStrings": "lib/webparts/insertEdit/loc/{locale}.js"
+  }
+}
