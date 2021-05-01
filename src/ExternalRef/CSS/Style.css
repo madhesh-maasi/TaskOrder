@@ -75,7 +75,7 @@ input.search-input::placeholder {
 }
 .search-section.bg-primary {
   margin-right: 20px;
-  padding-left: 6px;
+  padding: 5px;
 }
 .hide {
   display: none;
@@ -219,4 +219,20 @@ table#assessmentTable,
   border: 1px solid #000 !important;
   resize: none;
   height: 100px;
+}
+.form-label {
+  margin-bottom: 0rem;
+  padding: 4px;
+}
+.value{
+  font-size: 20px;
+}
+.clkbutton{
+  padding: 3px;
+  margin: 1px;
+  width: 60px;
+  color: #fff;
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+  letter-spacing: 1px;
 }
