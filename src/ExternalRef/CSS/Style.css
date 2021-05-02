@@ -138,6 +138,16 @@ input.form-control {
   display: inline-block;
   background: green;
 }
+.risk-color-yellow {
+  width: 40px;
+  display: inline-block;
+  background: yellow;
+}
+.risk-color-red{
+  width: 40px;
+  display: inline-block;
+  background: red;
+}
 .view-screen .header-info {
   width: 700px;
   text-align: right;
@@ -219,4 +229,11 @@ table#assessmentTable,
   border: 1px solid #000 !important;
   resize: none;
   height: 100px;
+}
+.submit-section{
+text-align: right;
+padding:20px;
+}
+.btn-submit{
+  border-radius: 0 !important;
 }
