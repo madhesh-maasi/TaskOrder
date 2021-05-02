@@ -138,6 +138,16 @@ input.form-control {
   display: inline-block;
   background: green;
 }
+.risk-color-yellow {
+  width: 40px;
+  display: inline-block;
+  background: yellow;
+}
+.risk-color-red{
+  width: 40px;
+  display: inline-block;
+  background: red;
+}
 .view-screen .header-info {
   width: 700px;
   text-align: right;
