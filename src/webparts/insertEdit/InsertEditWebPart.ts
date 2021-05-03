@@ -11,8 +11,10 @@ import * as strings from 'InsertEditWebPartStrings';
 import { SPComponentLoader } from "@microsoft/sp-loader";
 import "../../ExternalRef/CSS/style.css";
 import * as $ from "jquery";
-import pnp from 'sp-pnp-js';
-import * as moment from 'moment'
+import { sp } from "@pnp/pnpjs";
+import * as moment from 'moment';
+
+var siteURL = "";
 
 SPComponentLoader.loadCss("https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css");
 // SPComponentLoader.loadCss("https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js");
@@ -21,8 +23,15 @@ export interface IInsertEditWebPartProps {
 }
 
 export default class InsertEditWebPart extends BaseClientSideWebPart<IInsertEditWebPartProps> {
-
+  public onInit(): Promise<void> {
+    return super.onInit().then((_) => {
+      sp.setup({
+          spfxContext: this.context,
+      });
+    });
+  }
   public render(): void {
+    siteURL = this.context.pageContext.web.absoluteUrl;
 
     this.domElement.innerHTML = `
     <div class="new-screen">
@@ -412,9 +421,10 @@ export default class InsertEditWebPart extends BaseClientSideWebPart<IInsertEdit
   }
 }
 
-function getItems(Taskid) {
-  pnp.sp.web.lists.getByTitle('TaskOrder').items.getById(parseInt(Taskid)).get()
-    .then(result => {
+async function getItems(Taskid) {
+  await sp.web.lists.getByTitle('TaskOrder').items.getById(parseInt(Taskid)).get()
+    .then(async (result)=> 
+      {
       var OverallStatus = result.OverallStatus
       var RequirementStatus = result.RequirementStatus
       var FundingStatus = result.FundingStatus
@@ -485,7 +495,11 @@ function getItems(Taskid) {
         (ScheduleStatus == "Yellow" ? $("#schedule span").addClass("risk-color-yellow") :
           $("#strategy span").addClass("risk-color-red"))
     })
-    .catch(error => { alert(error); console.log(error) });
+    .catch(error => 
+      { 
+        alert(error); 
+        console.log(error) 
+      });
 }
 
 function updateItems(Taskid) {
@@ -495,7 +509,7 @@ function updateItems(Taskid) {
   var StrategyStatus = $("#strategy span").attr("class").split("-")[2]
   var ScheduleStatus = $("#schedule span").attr("class").split("-")[2]
 
-  pnp.sp.web.lists.getByTitle('TaskOrder').items.getById(parseInt(Taskid)).update({
+  sp.web.lists.getByTitle('TaskOrder').items.getById(parseInt(Taskid)).update({
     Title: $("#txtTaskOrderTitle").val(),
     TrackingNumber: $("#txtTrackingNumber").val(),
     CORName: $("#txtCORName").val(),
@@ -550,7 +564,8 @@ function updateItems(Taskid) {
     FundingStatus: FundingStatus == "green" ? "Green" : (FundingStatus == "yellow" ? "Yellow" : "Red"),
     StrategyStatus: StrategyStatus == "green" ? "Green" : (StrategyStatus == "yellow" ? "Yellow" : "Red"),
     ScheduleStatus: ScheduleStatus == "green" ? "Green" : (ScheduleStatus == "yellow" ? "Yellow" : "Red")
-  }).then(result => { alert("Task Order Updated Successfully") })
+  }).then(result => { alert("Task Order Updated Successfully"); 
+  location.href = `${siteURL}/SitePages/ViewTaskOrder.aspx` })
     .catch(error => { alert(error); console.log(error) });
 
 }
@@ -562,7 +577,7 @@ function addItems() {
   var StrategyStatus = $("#strategy span").attr("class").split("-")[2]
   var ScheduleStatus = $("#schedule span").attr("class").split("-")[2]
 
-  pnp.sp.web.lists.getByTitle('TaskOrder').items.add({
+  sp.web.lists.getByTitle('TaskOrder').items.add({
     Title: $("#txtTaskOrderTitle").val(),
     TrackingNumber: $("#txtTrackingNumber").val(),
     CORName: $("#txtCORName").val(),
@@ -617,6 +632,7 @@ function addItems() {
     FundingStatus: FundingStatus == "green" ? "Green" : (FundingStatus == "yellow" ? "Yellow" : "Red"),
     StrategyStatus: StrategyStatus == "green" ? "Green" : (StrategyStatus == "yellow" ? "Yellow" : "Red"),
     ScheduleStatus: ScheduleStatus == "green" ? "Green" : (ScheduleStatus == "yellow" ? "Yellow" : "Red")
-  }).then(result => { alert("Task Order Submitted Successfully") })
+  }).then(result => { alert("Task Order Submitted Successfully") ;
+  location.href = `${siteURL}/SitePages/ViewTaskOrder.aspx`})
     .catch(error => { alert(error); console.log(error) });
 }
