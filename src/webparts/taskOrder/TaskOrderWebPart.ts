@@ -14,7 +14,6 @@ import "../../ExternalRef/CSS/style.css";
 import * as $ from "jquery";
 import "@pnp/sp/webs";
 import { sp } from "@pnp/sp/presets/all";
-
 import "../../ExternalRef/js/jquery-1.12.4.js";
 import "../../ExternalRef/js/jquery-ui.js";
 
@@ -26,9 +25,9 @@ SPComponentLoader.loadCss("https://code.jquery.com/ui/1.12.1/themes/base/jquery-
 import "../../ExternalRef/css/alertify.min.css";
 var alertify: any = require("../../ExternalRef/js/alertify.min.js");
 
-var arrTrackingNumber=[];
-var flgautocmplt=true;
-var siteURL="";
+var arrTrackingNumber = [];
+var flgautocmplt = true;
+var siteURL = "";
 
 export interface ITaskOrderWebPartProps {
   description: string;
@@ -44,7 +43,7 @@ export default class TaskOrderWebPart extends BaseClientSideWebPart<ITaskOrderWe
     });
   }
   public render(): void {
-    siteURL=this.context.pageContext.web.absoluteUrl;
+    siteURL = this.context.pageContext.web.absoluteUrl;
     this.domElement.innerHTML = `
     <span style="display:none" class="loader">
 <img class="loader-spin"/>
@@ -63,7 +62,7 @@ export default class TaskOrderWebPart extends BaseClientSideWebPart<ITaskOrderWe
       <input type="text" class="search-input" id="tasknum" placeholder="Task Order Number" />
       </div>
       <div class="create-task-btn">
-      <button class="btn btn-sm btn-secondary border border-primary">Create New Task Order</button>
+      <button class="btn btn-sm btn-secondary border border-primary addtaskorder">Create New Task Order</button>
       </div>
       </div>
       </div>
@@ -202,22 +201,21 @@ export default class TaskOrderWebPart extends BaseClientSideWebPart<ITaskOrderWe
     `;
     getAllData()
 
-$(document).on('click','#clkclose',function()
-{
-  $(".view-screen").hide();
-  $("#tasknum").val('');
-  $(".landing-page").show();
-});
+    $(document).on('click', '#clkclose', function () {
+      $(".view-screen").hide();
+      $("#tasknum").val('');
+      $(".landing-page").show();
+    });
 
-$(document).on('click','.edittaskorder',function()
-{
-  location.href=`${siteURL}/SitePages/Home.aspx`;
-  //location.href=`${siteURL}/SitePages/InsertEdit.aspx?Taskid=${$(this).attr('data-id')}`;
-});
+    $(document).on('click', '.edittaskorder', function () {
+      location.href = `${siteURL}/SitePages/AddTaskOrder.aspx?Taskid=${$(this).attr('data-id')}`;
+    });
+    $(document).on('click', '.addtaskorder', function () {
+      location.href = `${siteURL}/SitePages/AddTaskOrder.aspx`;
+    });
   }
 
-  protected get dataVersion(): Version 
-  {
+  protected get dataVersion(): Version {
     return Version.parse('1.0');
   }
 
@@ -246,58 +244,52 @@ $(document).on('click','.edittaskorder',function()
 
 async function getAllData() {
   $(".loader").show();
-  await sp.web.lists.getByTitle("TaskOrder").items.select("TrackingNumber").get().then(async (item)=>
-  {
-    
-    for(var i=0;i<item.length;i++)
-    {
+  await sp.web.lists.getByTitle("TaskOrder").items.select("TrackingNumber").get().then(async (item) => {
+
+    for (var i = 0; i < item.length; i++) {
       //TrackingNumber+=item[i].TrackingNumber;
-      if(item[i].TrackingNumber)
-      arrTrackingNumber.push(item[i].TrackingNumber);
-      $("#tasknum").autocomplete({
-              source: arrTrackingNumber,
-              select:function(event,ui)
-              {
-                if(ui.item.value)
-                $('#tasknum').val(ui.item.value);
-                getTrakingfunction();
-              }
-            });
+      if (item[i].TrackingNumber)
+        arrTrackingNumber.push(item[i].TrackingNumber);
+      (<any>$("#tasknum")).autocomplete({
+        source: arrTrackingNumber,
+        select: function (event, ui) {
+          if (ui.item.value)
+            $('#tasknum').val(ui.item.value);
+          getTrakingfunction();
+        }
+      })
     }
 
   });
 }
 
-function getTrakingfunction() 
-{ 
+function getTrakingfunction() {
   getTaskOrderList($("#tasknum").val());
 }
 
-async function getTaskOrderList(TrackNum)
-{
-  await sp.web.lists.getByTitle("TaskOrder").items.select("*").filter("TrackingNumber eq '"+TrackNum+"'").get().then(async (item)=>
-  {
-    var htmlfortbodymilestone="";
-    var htmlforcurrentstatus="";
-    var htmlfortbodyassessmentrisk="";
-    var htmlforedit="";
-      console.log(item);
-    
+async function getTaskOrderList(TrackNum) {
+  await sp.web.lists.getByTitle("TaskOrder").items.select("*").filter("TrackingNumber eq '" + TrackNum + "'").get().then(async (item) => {
+    var htmlfortbodymilestone = "";
+    var htmlforcurrentstatus = "";
+    var htmlfortbodyassessmentrisk = "";
+    var htmlforedit = "";
+    console.log(item);
 
-      $('#TrackingNumber').text(TrackNum);
-      $('#OverallStatus').text(item[0].OverallStatus);
-      $('#COR').text(item[0].CORName);
-      $('#CAM').text(item[0].CAMName);
-   $('#Customer').text(item[0].Customer);
-   $('#Scope').text(item[0].Scope);
-   $('#Stakeholder').text(item[0].Stakeholders);
-   $('#Office').text(item[0].Office);
-   $('#Predecessor').text(item[0].Predecessor);
-   $('#LifecycleValue').text(item[0].LifecycleValue);
-   $('#SourceSelection').text(item[0].SourceSelection);
-   $('#TaskOrdertype').text(item[0].TaskOrdertype);
-   
-   htmlfortbodymilestone=`<tr><td>Package Submitted</td><td>${new Date(item[0].PackageSubmittedTargetDate).toLocaleDateString()}</td><td>${new Date(item[0].PackageSubmittedUpdatedTarget).toLocaleDateString()}</td><td>${new Date(item[0].PackageSubmittedActualDate).toLocaleDateString()}</td></tr>
+
+    $('#TrackingNumber').text(TrackNum);
+    $('#OverallStatus').text(item[0].OverallStatus);
+    $('#COR').text(item[0].CORName);
+    $('#CAM').text(item[0].CAMName);
+    $('#Customer').text(item[0].Customer);
+    $('#Scope').text(item[0].Scope);
+    $('#Stakeholder').text(item[0].Stakeholders);
+    $('#Office').text(item[0].Office);
+    $('#Predecessor').text(item[0].Predecessor);
+    $('#LifecycleValue').text(item[0].LifecycleValue);
+    $('#SourceSelection').text(item[0].SourceSelection);
+    $('#TaskOrdertype').text(item[0].TaskOrdertype);
+
+    htmlfortbodymilestone = `<tr><td>Package Submitted</td><td>${new Date(item[0].PackageSubmittedTargetDate).toLocaleDateString()}</td><td>${new Date(item[0].PackageSubmittedUpdatedTarget).toLocaleDateString()}</td><td>${new Date(item[0].PackageSubmittedActualDate).toLocaleDateString()}</td></tr>
    <tr><td>Package Reviewed</td><td>${new Date(item[0].PackageReviewedTargetDate).toLocaleDateString()}</td><td>${new Date(item[0].PackageReviewedUpdatedTarget).toLocaleDateString()}</td><td>${new Date(item[0].PackageReviewedActualDate).toLocaleDateString()}</td></tr>
    <tr><td>Draft Posted</td><td>${new Date(item[0].DraftPostedTargetDate).toLocaleDateString()}</td><td>${new Date(item[0].DraftPostedUpdatedTarget).toLocaleDateString()}</td><td>${new Date(item[0].DraftPostedActualDate).toLocaleDateString()}</td></tr>
    <tr><td>Industry Day</td><td>${new Date(item[0].IndustryDayTargetDate).toLocaleDateString()}</td><td>${new Date(item[0].IndustryDayUpdatedTarget).toLocaleDateString()}</td><td>${new Date(item[0].IndustryDayActualDate).toLocaleDateString()}</td></tr>
@@ -308,36 +300,34 @@ async function getTaskOrderList(TrackNum)
    <tr><td>Final Submit</td><td>${new Date(item[0].FinalSubmitTargetDate).toLocaleDateString()}</td><td>${new Date(item[0].FinalSubmitUpdatedTarget).toLocaleDateString()}</td><td>${new Date(item[0].FinalSubmitActualDate).toLocaleDateString()}</td></tr>
    <tr><td>Award release</td><td>${new Date(item[0].AwardReleaseTargetDate).toLocaleDateString()}</td><td>${new Date(item[0].AwardReleaseUpdatedTarget).toLocaleDateString()}</td><td>${new Date(item[0].AwardReleaseActualDate).toLocaleDateString()}</td></tr>`;
 
-   htmlforcurrentstatus=`<tr><th>STATUS</th><td>${item[0].Status}</td></tr>
+    htmlforcurrentstatus = `<tr><th>STATUS</th><td>${item[0].Status}</td></tr>
    <tr><th>ISSUES</th><td>${item[0].Issues}</td></tr>
    <tr><th>ACTIONS</th><td>${item[0].Actions}</td></tr>`;
 
-   htmlfortbodyassessmentrisk=`<tr><td></td><th>Requiremnets</th><td>${item[0].Requirement}</td></tr>
+    htmlfortbodyassessmentrisk = `<tr><td></td><th>Requiremnets</th><td>${item[0].Requirement}</td></tr>
    <tr><td></td><th>Funding</th><td>${item[0].Funding}</td></tr>
    <tr><td></td><th>Strategy</th><td>${item[0].Strategy}</td></tr>
    <tr><td></td><th>Schedule</th><td>${item[0].Schedule}</td></tr>`;
 
-   $("#tbodymilestone").html('');
-   $("#tbodymilestone").html(htmlfortbodymilestone);
-   $("#tbodycurrentstatus").html('');
-   $("#tbodycurrentstatus").html(htmlforcurrentstatus);
-   $("#tbodyassessmentrisk").html('');
-   $("#tbodyassessmentrisk").html(htmlfortbodyassessmentrisk);
+    $("#tbodymilestone").html('');
+    $("#tbodymilestone").html(htmlfortbodymilestone);
+    $("#tbodycurrentstatus").html('');
+    $("#tbodycurrentstatus").html(htmlforcurrentstatus);
+    $("#tbodyassessmentrisk").html('');
+    $("#tbodyassessmentrisk").html(htmlfortbodyassessmentrisk);
 
-   htmlforedit=`<button class="clkbutton edittaskorder" data-id=${TrackNum}>Edit</button>`;
-   $(".Edit").html(htmlforedit);
-   $(".landing-page").hide();
-   $(".view-screen").show();
+    htmlforedit = `<button class="clkbutton edittaskorder" data-id=${item[0].ID}>Edit</button>`;
+    $(".Edit").html(htmlforedit);
+    $(".landing-page").hide();
+    $(".view-screen").show();
 
-   $(".loader").hide();
-   
-  }).catch((error)=>
-  {
+    $(".loader").hide();
+
+  }).catch((error) => {
     ErrorCallBack(error, "TaskOrder");
   });
 }
-async function ErrorCallBack(error, methodname) 
-{
+async function ErrorCallBack(error, methodname) {
   try {
     var errordata = {
       Error: error.message,
@@ -346,8 +336,7 @@ async function ErrorCallBack(error, methodname)
     await sp.web.lists
       .getByTitle("ErrorLog")
       .items.add(errordata)
-      .then(function (data) 
-      {
+      .then(function (data) {
         $('.loader').hide();
         AlertMessage("Something went wrong.please contact system admin");
       });
