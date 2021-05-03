@@ -12,8 +12,7 @@ import { SPComponentLoader } from "@microsoft/sp-loader";
 import "../../ExternalRef/CSS/style.css";
 
 import * as $ from "jquery";
-import "@pnp/sp/webs";
-import { sp } from "@pnp/sp/presets/all";
+import { sp } from "@pnp/pnpjs";
 import "../../ExternalRef/js/jquery-1.12.4.js";
 import "../../ExternalRef/js/jquery-ui.js";
 
@@ -95,6 +94,13 @@ export default class TaskOrderWebPart extends BaseClientSideWebPart<ITaskOrderWe
       <div class="form-task-view">
       <div class="row my-3">
     <div class ="col-12 d-flex align-items-center">
+    <label for="" class="form-label">Task Order Title :</label>
+    <div class="d-flex w-100" id="Title">
+    </div> 
+    </div>
+    </div>
+      <div class="row my-3">
+    <div class ="col-12 d-flex align-items-center">
     <label for="" class="form-label">Customer :</label>
     <div class="d-flex w-100" id="Customer">
     </div> 
@@ -153,13 +159,13 @@ export default class TaskOrderWebPart extends BaseClientSideWebPart<ITaskOrderWe
       </div>
       <div class="milestone col-6">
       <div class="view-title-section text-light"> 
-      <h4>Milestone</h4>
+      <h4>Milestones</h4>
       </div>
       <table id="milestoneTable">
       <thead>
       <thead></thead>
       <th></th>
-      <th>Target Dte</th>
+      <th>Target Date</th>
       <th>Updated Target Date</th>
       <th>Actual Date</th>
       <thead> 
@@ -194,14 +200,14 @@ export default class TaskOrderWebPart extends BaseClientSideWebPart<ITaskOrderWe
       </table>
       </div>
       </div>
-      <div class="close">
-      <button class="clkbutton" id="clkclose">Close</button>
-      </div>
+    <div class="submit-section">
+    <button type="button" id="btnClose" class="btn btn-primary btn-submit">Close</button>
+    </div>
       </div>  
     `;
     getAllData()
 
-    $(document).on('click', '#clkclose', function () {
+    $(document).on('click', '#btnClose', function () {
       $(".view-screen").hide();
       $("#tasknum").val('');
       $(".landing-page").show();
@@ -252,6 +258,7 @@ async function getAllData() {
         arrTrackingNumber.push(item[i].TrackingNumber);
       (<any>$("#tasknum")).autocomplete({
         source: arrTrackingNumber,
+        appendTo: $('#tasknum').parents().eq(0),
         select: function (event, ui) {
           if (ui.item.value)
             $('#tasknum').val(ui.item.value);
@@ -273,14 +280,17 @@ async function getTaskOrderList(TrackNum) {
     var htmlforcurrentstatus = "";
     var htmlfortbodyassessmentrisk = "";
     var htmlforedit = "";
+    var htmlforOverallStatus = "";
     console.log(item);
 
 
     $('#TrackingNumber').text(TrackNum);
-    $('#OverallStatus').text(item[0].OverallStatus);
+    
+    //$('#OverallStatus').text(item[0].OverallStatus);
     $('#COR').text(item[0].CORName);
     $('#CAM').text(item[0].CAMName);
     $('#Customer').text(item[0].Customer);
+    $('#Title').text(item[0].Title);
     $('#Scope').text(item[0].Scope);
     $('#Stakeholder').text(item[0].Stakeholders);
     $('#Office').text(item[0].Office);
@@ -289,6 +299,7 @@ async function getTaskOrderList(TrackNum) {
     $('#SourceSelection').text(item[0].SourceSelection);
     $('#TaskOrdertype').text(item[0].TaskOrdertype);
 
+    htmlforOverallStatus =`<span style="background-color:${item[0].OverallStatus}"></span>`;
     htmlfortbodymilestone = `<tr><td>Package Submitted</td><td>${new Date(item[0].PackageSubmittedTargetDate).toLocaleDateString()}</td><td>${new Date(item[0].PackageSubmittedUpdatedTarget).toLocaleDateString()}</td><td>${new Date(item[0].PackageSubmittedActualDate).toLocaleDateString()}</td></tr>
    <tr><td>Package Reviewed</td><td>${new Date(item[0].PackageReviewedTargetDate).toLocaleDateString()}</td><td>${new Date(item[0].PackageReviewedUpdatedTarget).toLocaleDateString()}</td><td>${new Date(item[0].PackageReviewedActualDate).toLocaleDateString()}</td></tr>
    <tr><td>Draft Posted</td><td>${new Date(item[0].DraftPostedTargetDate).toLocaleDateString()}</td><td>${new Date(item[0].DraftPostedUpdatedTarget).toLocaleDateString()}</td><td>${new Date(item[0].DraftPostedActualDate).toLocaleDateString()}</td></tr>
@@ -304,11 +315,13 @@ async function getTaskOrderList(TrackNum) {
    <tr><th>ISSUES</th><td>${item[0].Issues}</td></tr>
    <tr><th>ACTIONS</th><td>${item[0].Actions}</td></tr>`;
 
-    htmlfortbodyassessmentrisk = `<tr><td></td><th>Requiremnets</th><td>${item[0].Requirement}</td></tr>
-   <tr><td></td><th>Funding</th><td>${item[0].Funding}</td></tr>
-   <tr><td></td><th>Strategy</th><td>${item[0].Strategy}</td></tr>
-   <tr><td></td><th>Schedule</th><td>${item[0].Schedule}</td></tr>`;
-
+    htmlfortbodyassessmentrisk = `<tr><td width="40px" style="background:${item[0].RequirementStatus}"></td><th>Requiremnets</th><td>${item[0].Requirement}</td></tr>
+   <tr><td width="40px" style="background:${item[0].FundingStatus}"></td><th>Funding</th><td>${item[0].Funding}</td></tr>
+   <tr><td width="40px" style="background:${item[0].StrategyStatus}"></td><th>Strategy</th><td>${item[0].Strategy}</td></tr>
+   <tr><td width="40px" style="background:${item[0].ScheduleStatus}"></td><th>Schedule</th><td>${item[0].Schedule}</td></tr>`;
+   
+   $("#OverallStatus").html('');
+    $("#OverallStatus").html(htmlforOverallStatus);
     $("#tbodymilestone").html('');
     $("#tbodymilestone").html(htmlfortbodymilestone);
     $("#tbodycurrentstatus").html('');
@@ -316,7 +329,7 @@ async function getTaskOrderList(TrackNum) {
     $("#tbodyassessmentrisk").html('');
     $("#tbodyassessmentrisk").html(htmlfortbodyassessmentrisk);
 
-    htmlforedit = `<button class="clkbutton edittaskorder" data-id=${item[0].ID}>Edit</button>`;
+    htmlforedit = `<a href="#" class="edittaskorder" data-id=${item[0].ID}><span class="icon-edit"></a>`;
     $(".Edit").html(htmlforedit);
     $(".landing-page").hide();
     $(".view-screen").show();

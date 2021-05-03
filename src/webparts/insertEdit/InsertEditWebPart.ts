@@ -14,6 +14,8 @@ import * as $ from "jquery";
 import { sp } from "@pnp/pnpjs";
 import * as moment from 'moment';
 
+import "../../ExternalRef/css/alertify.min.css";
+var alertify: any = require("../../ExternalRef/js/alertify.min.js");
 var siteURL = "";
 
 SPComponentLoader.loadCss("https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css");
@@ -34,30 +36,40 @@ export default class InsertEditWebPart extends BaseClientSideWebPart<IInsertEdit
     siteURL = this.context.pageContext.web.absoluteUrl;
 
     this.domElement.innerHTML = `
+  
     <div class="new-screen">
+    <div class="clsvalidate">*All Fields are Mandatory</div>
     <div class="section-insert">
     <div class="title-section text-light bg-primary">
     <h4>Task Order Informantion</h4>
     </div>
     <div class="task-form container">
     <div class="row my-3">
-    <div class ="col-6 d-flex align-items-center">
+    <div class ="col-6 d-flex ">
     <label for="" class="form-label">Task Order Title :</label>
-    <input type="text" id="txtTaskOrderTitle" class="form-control" required>
+    <div class="w-100">
+    <input type="text" id="txtTaskOrderTitle" class="form-control">
+    <p class="validation" style="display:none">Please Enter this Field</p></div>
     </div>
-    <div class ="col-6 d-flex align-items-center">
+    <div class ="col-6 d-flex">
     <label for="" class="form-label">COR Name:</label>
+    <div class="w-100">
     <input type="text" id="txtCORName" class="form-control" >
+    <p class="validation"style="display:none">Please Enter this Field</p></div>
     </div>
     </div>
     <div class="row my-3">
-    <div class ="col-6 d-flex align-items-center">
+    <div class ="col-6 d-flex">
     <label for="" class="form-label">Tracking Number :</label>
+    <div class="w-100">
     <input type="text" id="txtTrackingNumber" class="form-control" >
+    <p class="validation"style="display:none">Please Enter this Field</p></div>
     </div>
-    <div class ="col-6 d-flex align-items-center">
+    <div class ="col-6 d-flex">
     <label for="" class="form-label">CAM Name:</label>
+    <div class="w-100">
     <input type="text" id="txtCAMName" class="form-control" >
+    <p class="validation"style="display:none">Please Enter this Field</p></div>
     </div>
     </div>
     <div class="row my-3">
@@ -76,48 +88,64 @@ export default class InsertEditWebPart extends BaseClientSideWebPart<IInsertEdit
     </div> 
     <div class="task-form">
     <div class="row my-3"> 
-    <div class ="col-6 d-flex align-items-center">
+    <div class ="col-6 d-flex">
     <label for="" class="form-label">Customer :</label>
+    <div class="w-100">
     <input type="text" id="txtCustomer" class="form-control" >
+    <p class="validation"style="display:none">Please Enter this Field</p></div>
     </div>
-    <div class ="col-6 d-flex align-items-center">
+    <div class ="col-6 d-flex">
     <label for="" class="form-label">Scope :</label>
+    <div class="w-100">
     <input type="text" id="txtScope" class="form-control" >
+    <p class="validation"style="display:none">Please Enter this Field</p></div>
     </div>
     </div>
     <div class="row my-3">
-    <div class ="col-6 d-flex align-items-center">
+    <div class ="col-6 d-flex">
     <label for="" class="form-label">Stakeholders :</label>
+    <div class="w-100">
     <input type="text" id="txtStakeholders" class="form-control" >
+    <p class="validation"style="display:none">Please Enter this Field</p></div>
     </div>
-    <div class ="col-6 d-flex align-items-center">
+    <div class ="col-6 d-flex">
     <label for="" class="form-label">Office :</label>
+    <div class="w-100">
     <input type="text" id="txtOffice" class="form-control" >
+    <p class="validation"style="display:none">Please Enter this Field</p></div>
     </div>
     </div>
     <div class="row my-3">
-    <div class ="col-6 d-flex align-items-center">
+    <div class ="col-6 d-flex">
     <label for="" class="form-label">Predecessor :</label>
+    <div class="w-100">
     <input type="text" id="txtPredecessor" class="form-control" >
+    <p class="validation"style="display:none">Please Enter this Field</p></div>
     </div>
-    <div class ="col-6 d-flex align-items-center">
+    <div class ="col-6 d-flex">
     <label for="" class="form-label">Lifecycle Value :</label>
+    <div class="w-100">
     <input type="text" id="txtLifecycleValue" class="form-control" >
+    <p class="validation"style="display:none">Please Enter this Field</p></div>
     </div>
     </div>
     <div class="row my-3">
-    <div class ="col-6 d-flex align-items-center">
+    <div class ="col-6 d-flex">
     <label for="" class="form-label">Source Selection :</label>
+    <div class="w-100">
     <input type="text" id="txtSourceSelection" class="form-control" >
+    <p class="validation"style="display:none">Please Enter this Field</p></div>
     </div>
-    <div class ="col-6 d-flex align-items-center">
+    <div class ="col-6 d-flex">
     <label for="" class="form-label">Task Order type :</label>
+    <div class="w-100">
     <input type="text" id="txtTaskOrdertype" class="form-control" >
+    <p class="validation"style="display:none">Please Enter this Field</p></div>
     </div>
-    </div>
+    </div> 
     </div>
     <div class="title-section text-light bg-primary">
-    <h4>Task Order Details</h4>
+    <h4>Task Order Milestones</h4>
     </div>
     <div class="task-form">
     <div class="row my-3">
@@ -136,17 +164,17 @@ export default class InsertEditWebPart extends BaseClientSideWebPart<IInsertEdit
     <div class ="col-6 d-flex align-items-center">
     <label for="" class="form-label">Package Submitted :</label>
     <div class="d-flex justify-content-between w-100 date-section">
-    <input type="date" id="dtPackageSubmittedTargetDate"/>
-    <input type="date" id="dtPackageSubmittedUpdatedTarget"/>
-    <input type="date" id="dtPackageSubmittedActualDate"/> 
+    <input type="date" class="todaydate" id="dtPackageSubmittedTargetDate"/>
+    <input type="date" class="todaydate" id="dtPackageSubmittedUpdatedTarget"/>
+    <input type="date" class="todaydate" id="dtPackageSubmittedActualDate"/> 
     </div>
     </div>
     <div class ="col-6 d-flex align-items-center">
     <label for="" class="form-label">Proposal recvd :</label>
     <div class="d-flex justify-content-between w-100 date-section">
-    <input type="date" id="dtProposalrecvdTargetDate"/>
-    <input type="date" id="dtProposalrecvdUpdatedTarget"/>
-    <input type="date" id="dtProposalrecvdActualDate"/> 
+    <input type="date" class="todaydate" id="dtProposalrecvdTargetDate"/>
+    <input type="date" class="todaydate" id="dtProposalrecvdUpdatedTarget"/>
+    <input type="date" class="todaydate" id="dtProposalrecvdActualDate"/> 
     </div>
     </div>
     </div>
@@ -154,17 +182,17 @@ export default class InsertEditWebPart extends BaseClientSideWebPart<IInsertEdit
     <div class ="col-6 d-flex align-items-center">
     <label for="" class="form-label">Package Reviewed :</label>
     <div class="d-flex justify-content-between w-100 date-section">
-    <input type="date" id="dtPackageReviewedTargetDate"/>
-    <input type="date" id="dtPackageReviewedUpdatedTarget"/>
-    <input type="date" id="dtPackageReviewedActualDate"/> 
+    <input type="date" class="todaydate" id="dtPackageReviewedTargetDate"/>
+    <input type="date" class="todaydate" id="dtPackageReviewedUpdatedTarget"/>
+    <input type="date" class="todaydate" id="dtPackageReviewedActualDate"/> 
     </div>
     </div>
     <div class ="col-6 d-flex align-items-center">
     <label for="" class="form-label">Convenes :</label>
     <div class="d-flex justify-content-between w-100 date-section">
-    <input type="date" id="dtConvenesTargetDate"/>
-    <input type="date" id="dtConvenesUpdatedTarget"/>
-    <input type="date" id="dtConvenesActualDate"/> 
+    <input type="date" class="todaydate" id="dtConvenesTargetDate"/>
+    <input type="date" class="todaydate" id="dtConvenesUpdatedTarget"/>
+    <input type="date" class="todaydate" id="dtConvenesActualDate"/> 
     </div>
     </div>
     </div>
@@ -172,17 +200,17 @@ export default class InsertEditWebPart extends BaseClientSideWebPart<IInsertEdit
     <div class ="col-6 d-flex align-items-center">
     <label for="" class="form-label">Draft Posted :</label>
     <div class="d-flex justify-content-between w-100 date-section">
-    <input type="date" id="dtDraftPostedTargetDate"/>
-    <input type="date" id="dtDraftPostedUpdatedTarget"/>
-    <input type="date" id="dtDraftPostedActualDate"/> 
+    <input type="date" class="todaydate" id="dtDraftPostedTargetDate"/>
+    <input type="date" class="todaydate" id="dtDraftPostedUpdatedTarget"/>
+    <input type="date" class="todaydate" id="dtDraftPostedActualDate"/> 
     </div>
     </div>
     <div class ="col-6 d-flex align-items-center">
     <label for="" class="form-label">Initial Submit :</label>
     <div class="d-flex justify-content-between w-100 date-section">
-    <input type="date" id="dtInitialSubmitTargetDate"/>
-    <input type="date" id="dtInitialSubmitUpdatedTarget"/>
-    <input type="date" id="dtInitialSubmitActualDate"/> 
+    <input type="date" class="todaydate" id="dtInitialSubmitTargetDate"/>
+    <input type="date" class="todaydate" id="dtInitialSubmitUpdatedTarget"/>
+    <input type="date" class="todaydate" id="dtInitialSubmitActualDate"/> 
     </div>
     </div>
     </div>
@@ -190,17 +218,17 @@ export default class InsertEditWebPart extends BaseClientSideWebPart<IInsertEdit
     <div class ="col-6 d-flex align-items-center">
     <label for="" class="form-label">Industry Day :</label>
     <div class="d-flex justify-content-between w-100 date-section">
-    <input type="date" id="dtIndustryDayTargetDate"/>
-    <input type="date" id="dtIndustryDayUpdatedTarget"/>
-    <input type="date" id="dtIndustryDayActualDate"/> 
+    <input type="date" class="todaydate" id="dtIndustryDayTargetDate"/>
+    <input type="date" class="todaydate" id="dtIndustryDayUpdatedTarget"/>
+    <input type="date" class="todaydate" id="dtIndustryDayActualDate"/> 
     </div>
     </div>
     <div class ="col-6 d-flex align-items-center">
     <label for="" class="form-label">Final Submit :</label>
     <div class="d-flex justify-content-between w-100 date-section">
-    <input type="date" id="dtFinalSubmitTargetDate"/>
-    <input type="date" id="dtFinalSubmitUpdatedTarget"/>
-    <input type="date" id="dtFinalSubmitActualDate"/> 
+    <input type="date" class="todaydate" id="dtFinalSubmitTargetDate"/>
+    <input type="date" class="todaydate" id="dtFinalSubmitUpdatedTarget"/>
+    <input type="date" class="todaydate" id="dtFinalSubmitActualDate"/> 
     </div>
     </div>
     </div>
@@ -208,17 +236,17 @@ export default class InsertEditWebPart extends BaseClientSideWebPart<IInsertEdit
     <div class ="col-6 d-flex align-items-center">
     <label for="" class="form-label">RFP Posted :</label>
     <div class="d-flex justify-content-between w-100 date-section">
-    <input type="date" id="dtRFPPostedTargetDate"/>
-    <input type="date" id="dtRFPPostedUpdatedTarget"/>
-    <input type="date" id="dtRFPPostedActualDate"/> 
+    <input type="date" class="todaydate" id="dtRFPPostedTargetDate"/>
+    <input type="date" class="todaydate" id="dtRFPPostedUpdatedTarget"/>
+    <input type="date" class="todaydate" id="dtRFPPostedActualDate"/> 
     </div>
     </div>
     <div class ="col-6 d-flex align-items-center">
     <label for="" class="form-label">Award release :</label>
     <div class="d-flex justify-content-between w-100 date-section">
-    <input type="date" id="dtAwardReleaseTargetDate"/>
-    <input type="date" id="dtAwardReleaseUpdatedTarget"/>
-    <input type="date" id="dtAwardReleaseActualDate"/> 
+    <input type="date" class="todaydate" id="dtAwardReleaseTargetDate"/>
+    <input type="date" class="todaydate" id="dtAwardReleaseUpdatedTarget"/>
+    <input type="date" class="todaydate" id="dtAwardReleaseActualDate"/> 
     </div>
     </div>
     </div>
@@ -228,63 +256,82 @@ export default class InsertEditWebPart extends BaseClientSideWebPart<IInsertEdit
     <div class="title-section text-light bg-primary">
     <h4>Current Risk</h4>
     </div> 
+    <div class="current-risk">
     <div class="row my-3">
-    <div class ="col-12 d-flex align-items-center">
+    <div class ="col-12 d-flex">
     <label for="" class="form-label">Status :</label>
+    <div class="w-100">
     <input type="text" id="txtStatus" class="form-control" >
+    <p class="validation"style="display:none">Please Enter this Field</p></div>
     </div>
-    </div>
+    </div> 
     <div class="row my-3">
-    <div class ="col-12 d-flex align-items-center">
+    <div class ="col-12 d-flex">
     <label for="" class="form-label">Issues :</label>
+    <div class="w-100">
     <textarea id="txtIssues" class="form-control" placeholder="" ></textarea>
+    <p class="validation"style="display:none">Please Enter this Field</p></div>
     </div>
     </div> 
-    <div class="row my-3">
-    <div class ="col-12 d-flex align-items-center">
+    <div class="row my-3"> 
+    <div class ="col-12 d-flex">
     <label for="" class="form-label">Actions :</label>
+    <div class="w-100">
     <textarea id="txtActions" class="form-control" placeholder="" ></textarea> 
+    <p class="validation"style="display:none">Please Enter this Field</p></div>
     </div> 
+    </div>
     </div>
     </div>
     <div class="acquisition risk col-6">
     <div class="title-section text-light bg-primary">
     <h4>Acquisition Risk</h4>
     </div> 
+    <div class="acquisition-risk">
+    <p>Note : Click on the color boxes to change the respective status</p>
     <div class="row my-3">
-    <div id = "requirement" class ="col-12 d-flex align-items-center">
+    <div id = "requirement" class ="col-12 d-flex">
     <label for="" class="form-label">Requirement :</label>
+    <div class="w-100">
     <div class="d-flex w-100">
     <span ></span><input type="text" id="txtRequirement" class="form-control">
     </div> 
+    <p class="validation txtRequirement"style="display:none">Please Enter this Field</p></div>
     </div>
     </div>
     <div class="row my-3">
-    <div id = "funding" class ="col-12 d-flex align-items-center">
+    <div id = "funding" class ="col-12 d-flex">
     <label for="" class="form-label">Funding :</label>
+    <div class="w-100">
     <div class="d-flex w-100">
     <span></span><input type="text" id="txtFunding" class="form-control" >
     </div> 
+    <p class="validation txtFunding"style="display:none">Please Enter this Field</p></div>
     </div>
     </div>
     <div class="row my-3">
-    <div id = "strategy" class ="col-12 d-flex align-items-center">
+    <div id = "strategy" class ="col-12 d-flex">
     <label for="" class="form-label">Strategy :</label>
+    <div class="w-100">
     <div class="d-flex w-100">
     <span></span><input type="text" id="txtStrategy" class="form-control" >
     </div> 
+    <p class="validation txtStrategy"style="display:none">Please Enter this Field</p></div>
     </div> 
     </div>
     <div class="row my-3">
-    <div id = "schedule" class ="col-12 d-flex align-items-center">
+    <div id = "schedule" class ="col-12 d-flex">
     <label for="" class="form-label">Schedule :</label>  
+    <div class="w-100">
     <div class="d-flex w-100">
     <span></span><input type="text" id="txtSchedule" class="form-control" >
     </div> 
+    <p class="validation txtSchedule"style="display:none">Please Enter this Field</p></div>
     </div>
     </div>
     </div>
-    </div> 
+    </div>
+    <div> 
     <div class="submit-section">
     <button type="button" id="btnSubmit" class="btn btn-primary btn-submit">Submit</button>
     </div>
@@ -300,6 +347,7 @@ export default class InsertEditWebPart extends BaseClientSideWebPart<IInsertEdit
 
     }
     else {
+      $('.todaydate').val(moment().format("YYYY-MM-DD"));
       $(".color-status div:eq(0)").addClass("active")
       $("#requirement span").addClass("risk-color-green")
       $("#funding span").addClass("risk-color-green")
@@ -308,6 +356,9 @@ export default class InsertEditWebPart extends BaseClientSideWebPart<IInsertEdit
     }
 
     $("#btnSubmit").on("click", function () {
+      $(".validation").hide();
+    if(mandatoryforaddaction())
+    {
       var OverallStatus = $(".color-status .active").index()
       var RequirementStatus = $("#requirement span").attr("class").split("-")[2]
       var FundingStatus = $("#funding span").attr("class").split("-")[2]
@@ -320,6 +371,10 @@ export default class InsertEditWebPart extends BaseClientSideWebPart<IInsertEdit
       else {
         addItems()
       }
+    }
+    else{
+      console.log("All fileds not filled");
+    }
     });
 
     $(".color-status div").on("click", function () {
@@ -497,8 +552,9 @@ async function getItems(Taskid) {
     })
     .catch(error => 
       { 
-        alert(error); 
-        console.log(error) 
+        // alert(error); 
+        // console.log(error) 
+        ErrorCallBack(error, "getItems");
       });
 }
 
@@ -564,9 +620,14 @@ function updateItems(Taskid) {
     FundingStatus: FundingStatus == "green" ? "Green" : (FundingStatus == "yellow" ? "Yellow" : "Red"),
     StrategyStatus: StrategyStatus == "green" ? "Green" : (StrategyStatus == "yellow" ? "Yellow" : "Red"),
     ScheduleStatus: ScheduleStatus == "green" ? "Green" : (ScheduleStatus == "yellow" ? "Yellow" : "Red")
-  }).then(result => { alert("Task Order Updated Successfully"); 
+  }).then(result => { 
+    // alert("Task Order Updated Successfully"); 
+    AlertMessage("Task Order Updated Successfully");
   location.href = `${siteURL}/SitePages/ViewTaskOrder.aspx` })
-    .catch(error => { alert(error); console.log(error) });
+    .catch(error => {
+       //alert(error); console.log(error)
+       ErrorCallBack(error, "updateItems");
+       });
 
 }
 
@@ -632,7 +693,79 @@ function addItems() {
     FundingStatus: FundingStatus == "green" ? "Green" : (FundingStatus == "yellow" ? "Yellow" : "Red"),
     StrategyStatus: StrategyStatus == "green" ? "Green" : (StrategyStatus == "yellow" ? "Yellow" : "Red"),
     ScheduleStatus: ScheduleStatus == "green" ? "Green" : (ScheduleStatus == "yellow" ? "Yellow" : "Red")
-  }).then(result => { alert("Task Order Submitted Successfully") ;
+  }).then(result => { 
+    //alert("Task Order Submitted Successfully") ;
+    AlertMessage("Task Order Submitted Successfully");
   location.href = `${siteURL}/SitePages/ViewTaskOrder.aspx`})
-    .catch(error => { alert(error); console.log(error) });
+    .catch(error => { 
+      //alert(error); console.log(error)
+      ErrorCallBack(error, "addItems"); 
+    });
+}
+function mandatoryforaddaction()
+{
+  var isAllvalueFilled=true;
+  $(".form-control").each(function()
+  {
+    if($(this).val()=="")
+  {
+    $(this).next().show();
+    isAllvalueFilled=false;
+  }
+  if(!$("#txtRequirement").val())
+      {
+        $(".txtRequirement").show();
+        isAllvalueFilled=false;
+      }
+      if(!$("#txtFunding").val())
+      {
+        $(".txtFunding").show();
+        isAllvalueFilled=false;
+      }
+      if(!$("#txtStrategy").val())
+      {
+        $(".txtStrategy").show();
+        isAllvalueFilled=false;
+      }
+      if(!$("#txtSchedule").val())
+      {
+        $(".txtSchedule").show();
+        isAllvalueFilled=false;
+      }
+  });
+  return isAllvalueFilled;
+}
+async function ErrorCallBack(error, methodname) {
+  try {
+    var errordata = {
+      Error: error.message,
+      MethodName: methodname,
+    };
+    await sp.web.lists
+      .getByTitle("ErrorLog")
+      .items.add(errordata)
+      .then(function (data) {
+        $('.loader').hide();
+        AlertMessage("Something went wrong.please contact system admin");
+      });
+  } catch (e) {
+    $('.loader').hide();
+    AlertMessage("Something went wrong.please contact system admin");
+  }
+}
+function AlertMessage(strMewssageEN) {
+  alertify
+    .alert()
+    .setting({
+      label: "OK",
+
+      message: strMewssageEN,
+
+      onok: function () {
+        window.location.href = "#";
+      },
+    })
+    .show()
+    .setHeader("<em>Confirmation</em> ")
+    .set("closable", false);
 }

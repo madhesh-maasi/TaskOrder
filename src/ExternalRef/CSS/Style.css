@@ -32,7 +32,7 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  padding: 0 40px;
+  padding: 0 80px;
 }
 .header {
   display: flex;
@@ -129,6 +129,8 @@ input.form-control {
 }
 .date-section input[type="date"] {
   width: 130px;
+  letter-spacing: 0.5px;
+  padding-left: 3px;
 }
 .date-label div {
   font-weight: 500;
@@ -231,18 +233,71 @@ table#assessmentTable,
   height: 100px;
 }
 .form-label {
+  margin-top:4px;
   margin-bottom: 0rem;
-  padding: 4px;
 }
 .value{
   font-size: 20px;
 }
-.clkbutton{
-  padding: 3px;
-  margin: 1px;
-  width: 60px;
-  color: #fff;
-  background-color: #0d6efd;
-  border-color: #0d6efd;
-  letter-spacing: 1px;
+.validation {
+  color: red;
+}
+.current-risk{
+  padding-left: 20px;
+}
+.acquisition-risk{
+  padding-right: 20px;
+}
+.acquisition-risk p{
+    padding-left: 10px;
+    margin-top: 20px;
+    color: red;
+  }
+.color-status .active {
+  width: 27%;
+  Height: 120%;
+}
+.submit-section {
+  padding: 6px 10px;
+  text-align: right;
+}
+.icon-edit {
+  margin-left: 15px;
+  width: 30px;
+  height: 30px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: 50%;
+}
+.icon-edit {
+  background-image: url("../../ExternalRef/img/pencil.png");
+}
+#btnClose {
+  margin: 20px 0px;
+}
+div#OverallStatus span {
+  display: inline-block;
+  width: 80px;
+  height: 30px;
+  margin-left:10px;
+}
+
+table td {
+  white-space: pre;
+}
+.clsvalidate{
+  padding: 10px;
+  color: red;
+}
+.ui-menu .ui-menu-item-wrapper {
+  position: relative;
+}
+input::placeholder {
+  color: rgb(216, 211, 211) !important;
+}
+.ui-autocomplete { 
+  height: 200px;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
