@@ -276,6 +276,9 @@ table#assessmentTable,
 #btnClose {
   margin: 20px 0px;
 }
+#btnSubmit {
+  margin: 0px 20px;
+}
 div#OverallStatus span {
   display: inline-block;
   width: 80px;

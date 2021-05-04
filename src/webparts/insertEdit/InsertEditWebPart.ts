@@ -334,6 +334,7 @@ export default class InsertEditWebPart extends BaseClientSideWebPart<IInsertEdit
     <div> 
     <div class="submit-section">
     <button type="button" id="btnSubmit" class="btn btn-primary btn-submit">Submit</button>
+    <button type="button" id="btnClose" class="btn btn-primary btn-submit">Close</button>
     </div>
     </div>
     </div>  
@@ -376,6 +377,10 @@ export default class InsertEditWebPart extends BaseClientSideWebPart<IInsertEdit
       console.log("All fileds not filled");
     }
     });
+
+    $("#btnClose").on("click", function () {
+      location.href = `${siteURL}/SitePages/ViewTaskOrder.aspx`
+     });
 
     $(".color-status div").on("click", function () {
       $(".color-status div").removeClass("active");
@@ -548,7 +553,7 @@ async function getItems(Taskid) {
           $("#strategy span").addClass("risk-color-red"))
       ScheduleStatus == "Green" ? $("#schedule span").addClass("risk-color-green") :
         (ScheduleStatus == "Yellow" ? $("#schedule span").addClass("risk-color-yellow") :
-          $("#strategy span").addClass("risk-color-red"))
+          $("#schedule span").addClass("risk-color-red"))
     })
     .catch(error => 
       { 
