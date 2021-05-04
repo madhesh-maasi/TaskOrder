@@ -253,7 +253,7 @@ export default class InsertEditWebPart extends BaseClientSideWebPart<IInsertEdit
     </div> 
     <div class="risk-section row">
     <div class="current-risk col-6">
-    <div class="title-section text-light bg-primary">
+    <div class="title-section text-light bg-primary divrisk">
     <h4>Current Risk</h4>
     </div> 
     <div class="current-risk">
@@ -284,11 +284,11 @@ export default class InsertEditWebPart extends BaseClientSideWebPart<IInsertEdit
     </div>
     </div>
     <div class="acquisition risk col-6">
-    <div class="title-section text-light bg-primary">
+    <div class="title-section text-light bg-primary divrisk">
     <h4>Acquisition Risk</h4>
     </div> 
     <div class="acquisition-risk">
-    <p>Note : Click on the color boxes to change the respective status</p>
+    <p class="note">Note : Click on the color boxes to change the respective status</p>
     <div class="row my-3">
     <div id = "requirement" class ="col-12 d-flex">
     <label for="" class="form-label">Requirement :</label>
@@ -628,7 +628,8 @@ function updateItems(Taskid) {
   }).then(result => { 
     // alert("Task Order Updated Successfully"); 
     AlertMessage("Task Order Updated Successfully");
-  location.href = `${siteURL}/SitePages/ViewTaskOrder.aspx` })
+  //location.href = `${siteURL}/SitePages/ViewTaskOrder.aspx`
+ })
     .catch(error => {
        //alert(error); console.log(error)
        ErrorCallBack(error, "updateItems");
@@ -701,7 +702,8 @@ function addItems() {
   }).then(result => { 
     //alert("Task Order Submitted Successfully") ;
     AlertMessage("Task Order Submitted Successfully");
-  location.href = `${siteURL}/SitePages/ViewTaskOrder.aspx`})
+  //location.href = `${siteURL}/SitePages/ViewTaskOrder.aspx`
+})
     .catch(error => { 
       //alert(error); console.log(error)
       ErrorCallBack(error, "addItems"); 
@@ -767,7 +769,7 @@ function AlertMessage(strMewssageEN) {
       message: strMewssageEN,
 
       onok: function () {
-        window.location.href = "#";
+        window.location.href = `${siteURL}/SitePages/ViewTaskOrder.aspx`;
       },
     })
     .show()

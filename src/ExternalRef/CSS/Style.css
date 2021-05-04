@@ -32,7 +32,8 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  padding: 0 80px;
+  padding: 0 40px;
+  margin:0 70px;
 }
 .header {
   display: flex;
@@ -91,6 +92,9 @@ input.search-input::placeholder {
 }
 .task-form {
   padding: 20px;
+}
+.task-form.container {
+  padding: 20px 8px;
 }
 .section-insert {
   background: #adc6eb;
@@ -243,12 +247,12 @@ table#assessmentTable,
   color: red;
 }
 .current-risk{
-  padding-left: 20px;
+  padding-left: 17px;
 }
 .acquisition-risk{
   padding-right: 20px;
 }
-.acquisition-risk p{
+.acquisition-risk .note{
     padding-left: 10px;
     margin-top: 20px;
     color: red;
@@ -303,4 +307,7 @@ input::placeholder {
   height: 200px;
   overflow-y: scroll;
   overflow-x: hidden;
+}
+.divrisk{
+  margin-bottom: 35px;
 }
