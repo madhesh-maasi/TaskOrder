@@ -93,9 +93,6 @@ input.search-input::placeholder {
 .task-form {
   padding: 20px;
 }
-.task-form.container {
-  padding: 20px 8px;
-}
 .section-insert {
   background: #adc6eb;
 }
@@ -237,11 +234,15 @@ table#assessmentTable,
   height: 100px;
 }
 .form-label {
-  margin-top:4px;
+  padding-top: 2px;
   margin-bottom: 0rem;
+}
+.d-flex {
+  padding-top: 2px;
 }
 .value{
   font-size: 20px;
+  margin-left: 5px;
 }
 .validation {
   color: red;
@@ -287,7 +288,7 @@ div#OverallStatus span {
   display: inline-block;
   width: 80px;
   height: 30px;
-  margin-left:10px;
+  margin-left:5px;
 }
 table td {
   white-space: pre;
@@ -312,4 +313,11 @@ input::placeholder {
 }
 .divrisk{
   margin-bottom: 35px;
+}
+input#tasknum {
+  min-width: 168px;
+}
+ul#ui-id-1 {
+  left: 129px !important;
+  width: 179px !important;
 }

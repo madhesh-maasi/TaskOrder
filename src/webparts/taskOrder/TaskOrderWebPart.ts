@@ -25,7 +25,6 @@ import "../../ExternalRef/css/alertify.min.css";
 var alertify: any = require("../../ExternalRef/js/alertify.min.js");
 
 var arrTrackingNumber = [];
-var flgautocmplt = true;
 var siteURL = "";
 
 export interface ITaskOrderWebPartProps {
@@ -72,7 +71,7 @@ export default class TaskOrderWebPart extends BaseClientSideWebPart<ITaskOrderWe
       <div class="header-info"> 
       <p>Requirements needed to complete packages regarding the TreCuquising  Association Board.</p> 
       <div class="track-num-sec d-flex justify-content-end">
-      <label>Tracking Number :</label><label id="TrackingNumber"></label>
+      <label>Tracking Number :</label><label class="value" id="TrackingNumber"></label>
       <div class="Edit">
       </div>
       </div>
@@ -207,11 +206,14 @@ export default class TaskOrderWebPart extends BaseClientSideWebPart<ITaskOrderWe
     `;
     getAllData()
 
-    $(document).on('click', '#btnClose', function () {
-      $(".view-screen").hide();
-      $("#tasknum").val('');
-      $(".landing-page").show();
-    });
+    // $(document).on('click', '#btnClose', function () {
+    //   $(".view-screen").hide();
+    //   $("#tasknum").val('');
+    //   $(".landing-page").show();
+    // });
+    $("#btnClose").on("click", function () {
+      location.href = `${siteURL}/SitePages/ViewTaskOrder.aspx`
+     });
 
     $(document).on('click', '.edittaskorder', function () {
       location.href = `${siteURL}/SitePages/AddTaskOrder.aspx?Taskid=${$(this).attr('data-id')}`;
@@ -252,7 +254,9 @@ async function getAllData() {
   $(".loader").show();
   await sp.web.lists.getByTitle("TaskOrder").items.select("TrackingNumber").get().then(async (item) => {
 
-    for (var i = 0; i < item.length; i++) {
+    //for (var i = 0; i < item.length; i++) 
+    for (var i = item.length-1; i >=0; i--) 
+    {
       //TrackingNumber+=item[i].TrackingNumber;
       if (item[i].TrackingNumber)
         arrTrackingNumber.push(item[i].TrackingNumber);
@@ -281,12 +285,10 @@ async function getTaskOrderList(TrackNum) {
     var htmlfortbodyassessmentrisk = "";
     var htmlforedit = "";
     var htmlforOverallStatus = "";
+    var Status,Issues,Actions,Requirement,Funding,Strategy,Schedule;
     console.log(item);
 
-
     $('#TrackingNumber').text(TrackNum);
-    
-    //$('#OverallStatus').text(item[0].OverallStatus);
     $('#COR').text(item[0].CORName);
     $('#CAM').text(item[0].CAMName);
     $('#Customer').text(item[0].Customer);
@@ -311,14 +313,56 @@ async function getTaskOrderList(TrackNum) {
    <tr><th>Final Submit</th><td>${new Date(item[0].FinalSubmitTargetDate).toLocaleDateString()}</td><td>${new Date(item[0].FinalSubmitUpdatedTarget).toLocaleDateString()}</td><td>${new Date(item[0].FinalSubmitActualDate).toLocaleDateString()}</td></tr>
    <tr><th>Award release</th><td>${new Date(item[0].AwardReleaseTargetDate).toLocaleDateString()}</td><td>${new Date(item[0].AwardReleaseUpdatedTarget).toLocaleDateString()}</td><td>${new Date(item[0].AwardReleaseActualDate).toLocaleDateString()}</td></tr>`;
 
-    htmlforcurrentstatus = `<tr><th>STATUS</th><td>${item[0].Status}</td></tr>
-   <tr><th>ISSUES</th><td>${item[0].Issues}</td></tr>
-   <tr><th>ACTIONS</th><td>${item[0].Actions}</td></tr>`;
+    Status=item[0].Status;
+    if(Status!=null)
+    Status=item[0].Status;
+    else
+    Status=" ";
 
-    htmlfortbodyassessmentrisk = `<tr><td width="40px" style="background:${item[0].RequirementStatus}"></td><th>Requiremnets</th><td>${item[0].Requirement}</td></tr>
-   <tr><td width="40px" style="background:${item[0].FundingStatus}"></td><th>Funding</th><td>${item[0].Funding}</td></tr>
-   <tr><td width="40px" style="background:${item[0].StrategyStatus}"></td><th>Strategy</th><td>${item[0].Strategy}</td></tr>
-   <tr><td width="40px" style="background:${item[0].ScheduleStatus}"></td><th>Schedule</th><td>${item[0].Schedule}</td></tr>`;
+    Issues=item[0].Issues;
+    if(Issues!=null)
+    Issues=item[0].Issues;
+    else
+    Issues=" ";
+
+    Actions=item[0].Actions;
+    if(Actions!=null)
+    Actions=item[0].Actions;
+    else
+    Actions=" ";
+
+    htmlforcurrentstatus = `<tr><th>STATUS</th><td>${Status}</td></tr>
+   <tr><th>ISSUES</th><td>${Issues}</td></tr>
+   <tr><th>ACTIONS</th><td>${Actions}</td></tr>`;
+
+   Requirement=item[0].Requirement;
+    if(Requirement!=null)
+    Requirement=item[0].Requirement;
+    else
+    Requirement=" ";
+
+    Funding=item[0].Funding;
+    if(Funding!=null)
+    Funding=item[0].Funding;
+    else
+    Funding=" ";
+
+    Strategy=item[0].Strategy;
+    if(Strategy!=null)
+    Strategy=item[0].Strategy;
+    else
+    Strategy=" ";
+
+    Schedule=item[0].Schedule;
+    if(Schedule!=null)
+    Schedule=item[0].Schedule;
+    else
+    Schedule=" ";
+
+    htmlfortbodyassessmentrisk = `<tr><td width="40px" style="background:${item[0].RequirementStatus}"></td><th>Requiremnets</th><td>${Requirement}</td></tr>
+   <tr><td width="40px" style="background:${item[0].FundingStatus}"></td><th>Funding</th><td>${Funding}</td></tr>
+   <tr><td width="40px" style="background:${item[0].StrategyStatus}"></td><th>Strategy</th><td>${Strategy}</td></tr>
+   <tr><td width="40px" style="background:${item[0].ScheduleStatus}"></td><th>Schedule</th><td>${Schedule}</td></tr>`;
    
    $("#OverallStatus").html('');
     $("#OverallStatus").html(htmlforOverallStatus);

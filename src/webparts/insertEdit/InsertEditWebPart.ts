@@ -43,14 +43,14 @@ export default class InsertEditWebPart extends BaseClientSideWebPart<IInsertEdit
     <div class="title-section text-light bg-primary">
     <h4>Task Order Informantion</h4>
     </div>
-    <div class="task-form container">
+    <div class="task-form">
     <div class="row my-3">
     <div class ="col-6 d-flex ">
     <label for="" class="form-label">Task Order Title :</label>
     <div class="w-100">
     <input type="text" id="txtTaskOrderTitle" class="form-control">
     <p class="validation" style="display:none">Please Enter this Field</p></div>
-    </div>
+    </div> 
     <div class ="col-6 d-flex">
     <label for="" class="form-label">COR Name:</label>
     <div class="w-100">
@@ -358,8 +358,8 @@ export default class InsertEditWebPart extends BaseClientSideWebPart<IInsertEdit
 
     $("#btnSubmit").on("click", function () {
       $(".validation").hide();
-    if(mandatoryforaddaction())
-    {
+    // if(mandatoryforaddaction())
+    // {
       var OverallStatus = $(".color-status .active").index()
       var RequirementStatus = $("#requirement span").attr("class").split("-")[2]
       var FundingStatus = $("#funding span").attr("class").split("-")[2]
@@ -372,10 +372,10 @@ export default class InsertEditWebPart extends BaseClientSideWebPart<IInsertEdit
       else {
         addItems()
       }
-    }
-    else{
-      console.log("All fileds not filled");
-    }
+    // }
+    // else{
+    //   console.log("All fileds not filled");
+    // }
     });
 
     $("#btnClose").on("click", function () {
