@@ -69,9 +69,11 @@ export default class TaskOrderWebPart extends BaseClientSideWebPart<ITaskOrderWe
       <div class="view-header d-flex justify-content-between">
       <div><div class="logo bg-primary">Logo</div></div>
       <div class="header-info"> 
-      <p>Requirements needed to complete packages regarding the TreCuquising  Association Board.</p> 
-      <div class="track-num-sec d-flex justify-content-end">
-      <label>Tracking Number :</label><label class="value" id="TrackingNumber"></label>
+      <div class="track-num-sec d-flex justify-content-Start">
+      <label>Task Order Title</label><label style="padding-left:25px">:</label><label class="value" id="Taskordertitle"></label>
+      </div>
+      <div class="track-num-sec d-flex justify-content-start">
+      <label>Tracking Number</label><label style="padding-left:10px">:</label><label class="value" id="TrackingNumber"></label>
       <div class="Edit">
       </div>
       </div>
@@ -93,63 +95,64 @@ export default class TaskOrderWebPart extends BaseClientSideWebPart<ITaskOrderWe
       <div class="form-task-view">
       <div class="row my-3">
     <div class ="col-12 d-flex align-items-center">
-    <label for="" class="form-label">Task Order Title :</label>
-    <div class="d-flex w-100" id="Title">
-    </div> 
-    </div>
-    </div>
-      <div class="row my-3">
-    <div class ="col-12 d-flex align-items-center">
-    <label for="" class="form-label">Customer :</label>
+    <label for="" class="form-label">Customer</label>
+    <label class="lblpadding">:</label>
     <div class="d-flex w-100" id="Customer">
     </div> 
     </div>
     </div>
     <div class="row my-3">
     <div class ="col-12 d-flex align-items-center">
-    <label for="" class="form-label">Scope :</label>
+    <label for="" class="form-label">Scope</label>
+    <label class="lblpadding">:</label>
     <div class="d-flex w-100" id="Scope">
     </div> 
     </div>
     </div>
     <div class="row my-3">
     <div class ="col-12 d-flex align-items-center">
-    <label for="" class="form-label">Stakeholder :</label>
+    <label for="" class="form-label">Stakeholder</label>
+    <label class="lblpadding">:</label>
     <div class="d-flex w-100" id="Stakeholder">
     </div> 
     </div>
     </div>
     <div class="row my-3">
     <div class ="col-12 d-flex align-items-center">
-    <label for="" class="form-label">Office :</label>
+    <label for="" class="form-label">Office</label>
+    <label class="lblpadding">:</label>
     <div class="d-flex w-100" id="Office">
     </div> 
     </div>
     </div>
     <div class="row my-3">
     <div class ="col-12 d-flex align-items-center">
-    <label for="" class="form-label">Predecessor :</label>
+    <label for="" class="form-label">Predecessor</label>
+    <label class="lblpadding">:</label>
     <div class="d-flex w-100" id="Predecessor">
     </div> 
     </div>
     </div>
     <div class="row my-3">
     <div class ="col-12 d-flex align-items-center">
-    <label for="" class="form-label">Lifecycle Value :</label>
+    <label for="" class="form-label">Lifecycle Value</label>
+    <label class="lblpadding">:</label>
     <div class="d-flex w-100" id="LifecycleValue">
     </div>
     </div>
     </div>
     <div class="row my-3">
     <div class ="col-12 d-flex align-items-center">
-    <label for="" class="form-label">Source Selection :</label>
+    <label for="" class="form-label">Source Selection</label>
+    <label class="lblpadding">:</label>
     <div class="d-flex w-100" id="SourceSelection">
     </div> 
     </div>
     </div>
     <div class="row my-3">
     <div class ="col-12 d-flex align-items-center">
-    <label for="" class="form-label">Task Order type :</label>
+    <label for="" class="form-label">Task Order type</label>
+    <label class="lblpadding">:</label>
     <div class="d-flex w-100" id="TaskOrdertype">
     </div> 
     </div>
@@ -289,10 +292,10 @@ async function getTaskOrderList(TrackNum) {
     console.log(item);
 
     $('#TrackingNumber').text(TrackNum);
+    $('#Taskordertitle').text(item[0].Title);
     $('#COR').text(item[0].CORName);
     $('#CAM').text(item[0].CAMName);
     $('#Customer').text(item[0].Customer);
-    $('#Title').text(item[0].Title);
     $('#Scope').text(item[0].Scope);
     $('#Stakeholder').text(item[0].Stakeholders);
     $('#Office').text(item[0].Office);

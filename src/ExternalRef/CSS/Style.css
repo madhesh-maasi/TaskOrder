@@ -129,7 +129,7 @@ input.form-control {
   padding-left: 180px;
 }
 .date-section input[type="date"] {
-  width: 130px;
+  width: 140px;
   letter-spacing: 0.5px;
   padding-left: 3px;
 }
@@ -152,8 +152,8 @@ input.form-control {
   background: red;
 }
 .view-screen .header-info {
-  width: 700px;
   text-align: right;
+  margin-top: 20px;
 }
 .view-screen .header-info p {
   color: purple;
@@ -244,6 +244,9 @@ table#assessmentTable,
   font-size: 20px;
   margin-left: 5px;
 }
+.space{
+  margin-right: 53px;
+}
 .validation {
   color: red;
 }
@@ -320,4 +323,7 @@ input#tasknum {
 ul#ui-id-1 {
   left: 129px !important;
   width: 179px !important;
+}
+.lblpadding{
+  padding-right: 10px;
 }

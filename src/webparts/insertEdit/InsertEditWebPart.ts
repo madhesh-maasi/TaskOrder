@@ -261,7 +261,7 @@ export default class InsertEditWebPart extends BaseClientSideWebPart<IInsertEdit
     <div class ="col-12 d-flex">
     <label for="" class="form-label">Status :</label>
     <div class="w-100">
-    <input type="text" id="txtStatus" class="form-control" >
+    <textarea id="txtStatus" class="form-control" placeholder="" ></textarea>
     <p class="validation"style="display:none">Please Enter this Field</p></div>
     </div>
     </div> 
