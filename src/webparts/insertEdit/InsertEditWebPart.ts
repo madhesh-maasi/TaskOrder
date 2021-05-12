@@ -41,19 +41,19 @@ export default class InsertEditWebPart extends BaseClientSideWebPart<IInsertEdit
     <div class="clsvalidate">*All Fields are Mandatory</div>
     <div class="section-insert">
     <div class="title-section text-light bg-primary">
-    <h4>Task Order Informantion</h4>
+    <h4>Task Order Information</h4>
     </div>
-    <div class="task-form">
+    <div class="task-form pad">
     <div class="row my-3">
     <div class ="col-6 d-flex ">
     <label for="" class="form-label">Task Order Title :</label>
-    <div class="w-100">
+    <div class="w-50">
     <input type="text" id="txtTaskOrderTitle" class="form-control">
     <p class="validation" style="display:none">Please Enter this Field</p></div>
     </div> 
     <div class ="col-6 d-flex">
-    <label for="" class="form-label">COR Name:</label>
-    <div class="w-100">
+    <label for="" class="form-label">COR Name :</label>
+    <div class="w-50">
     <input type="text" id="txtCORName" class="form-control" >
     <p class="validation"style="display:none">Please Enter this Field</p></div>
     </div>
@@ -61,20 +61,20 @@ export default class InsertEditWebPart extends BaseClientSideWebPart<IInsertEdit
     <div class="row my-3">
     <div class ="col-6 d-flex">
     <label for="" class="form-label">Tracking Number :</label>
-    <div class="w-100">
+    <div class="w-50">
     <input type="text" id="txtTrackingNumber" class="form-control" >
     <p class="validation"style="display:none">Please Enter this Field</p></div>
     </div>
     <div class ="col-6 d-flex">
-    <label for="" class="form-label">CAM Name:</label>
-    <div class="w-100">
+    <label for="" class="form-label">CAM Name :</label>
+    <div class="w-50">
     <input type="text" id="txtCAMName" class="form-control" >
     <p class="validation"style="display:none">Please Enter this Field</p></div>
     </div>
     </div>
     <div class="row my-3">
     <div class ="col-6 d-flex align-items-center">
-    <label for="" class="form-label">OverAll Status:</label>
+    <label for="" class="form-label">OverAll Status :</label>
     <div class="color-status d-flex justify-content-between">
     <div class="color-green"></div> 
     <div class="color-yellow"></div>
@@ -86,17 +86,17 @@ export default class InsertEditWebPart extends BaseClientSideWebPart<IInsertEdit
     <div class="title-section text-light bg-primary">
     <h4>Task Order Details</h4>
     </div> 
-    <div class="task-form">
+    <div class="task-form pad">
     <div class="row my-3"> 
     <div class ="col-6 d-flex">
     <label for="" class="form-label">Customer :</label>
-    <div class="w-100">
+    <div class="w-50">
     <input type="text" id="txtCustomer" class="form-control" >
     <p class="validation"style="display:none">Please Enter this Field</p></div>
     </div>
     <div class ="col-6 d-flex">
     <label for="" class="form-label">Scope :</label>
-    <div class="w-100">
+    <div class="w-50">
     <input type="text" id="txtScope" class="form-control" >
     <p class="validation"style="display:none">Please Enter this Field</p></div>
     </div>
@@ -104,13 +104,13 @@ export default class InsertEditWebPart extends BaseClientSideWebPart<IInsertEdit
     <div class="row my-3">
     <div class ="col-6 d-flex">
     <label for="" class="form-label">Stakeholders :</label>
-    <div class="w-100">
+    <div class="w-50">
     <input type="text" id="txtStakeholders" class="form-control" >
     <p class="validation"style="display:none">Please Enter this Field</p></div>
     </div>
     <div class ="col-6 d-flex">
     <label for="" class="form-label">Office :</label>
-    <div class="w-100">
+    <div class="w-50">
     <input type="text" id="txtOffice" class="form-control" >
     <p class="validation"style="display:none">Please Enter this Field</p></div>
     </div>
@@ -118,13 +118,13 @@ export default class InsertEditWebPart extends BaseClientSideWebPart<IInsertEdit
     <div class="row my-3">
     <div class ="col-6 d-flex">
     <label for="" class="form-label">Predecessor :</label>
-    <div class="w-100">
+    <div class="w-50">
     <input type="text" id="txtPredecessor" class="form-control" >
     <p class="validation"style="display:none">Please Enter this Field</p></div>
     </div>
     <div class ="col-6 d-flex">
     <label for="" class="form-label">Lifecycle Value :</label>
-    <div class="w-100">
+    <div class="w-50">
     <input type="text" id="txtLifecycleValue" class="form-control" >
     <p class="validation"style="display:none">Please Enter this Field</p></div>
     </div>
@@ -132,13 +132,13 @@ export default class InsertEditWebPart extends BaseClientSideWebPart<IInsertEdit
     <div class="row my-3">
     <div class ="col-6 d-flex">
     <label for="" class="form-label">Source Selection :</label>
-    <div class="w-100">
+    <div class="w-50">
     <input type="text" id="txtSourceSelection" class="form-control" >
     <p class="validation"style="display:none">Please Enter this Field</p></div>
     </div>
     <div class ="col-6 d-flex">
     <label for="" class="form-label">Task Order type :</label>
-    <div class="w-100">
+    <div class="w-50">
     <input type="text" id="txtTaskOrdertype" class="form-control" >
     <p class="validation"style="display:none">Please Enter this Field</p></div>
     </div>
@@ -170,7 +170,7 @@ export default class InsertEditWebPart extends BaseClientSideWebPart<IInsertEdit
     </div>
     </div>
     <div class ="col-6 d-flex align-items-center">
-    <label for="" class="form-label">Proposal recvd :</label>
+    <label for="" class="form-label">Proposal Received :</label>
     <div class="d-flex justify-content-between w-100 date-section">
     <input type="date" class="todaydate" id="dtProposalrecvdTargetDate"/>
     <input type="date" class="todaydate" id="dtProposalrecvdUpdatedTarget"/>
@@ -242,7 +242,7 @@ export default class InsertEditWebPart extends BaseClientSideWebPart<IInsertEdit
     </div>
     </div>
     <div class ="col-6 d-flex align-items-center">
-    <label for="" class="form-label">Award release :</label>
+    <label for="" class="form-label">Award Release :</label>
     <div class="d-flex justify-content-between w-100 date-section">
     <input type="date" class="todaydate" id="dtAwardReleaseTargetDate"/>
     <input type="date" class="todaydate" id="dtAwardReleaseUpdatedTarget"/>
@@ -260,7 +260,7 @@ export default class InsertEditWebPart extends BaseClientSideWebPart<IInsertEdit
     <div class="row my-3">
     <div class ="col-12 d-flex">
     <label for="" class="form-label">Status :</label>
-    <div class="w-100">
+    <div class="w-50">
     <textarea id="txtStatus" class="form-control" placeholder="" ></textarea>
     <p class="validation"style="display:none">Please Enter this Field</p></div>
     </div>
@@ -268,7 +268,7 @@ export default class InsertEditWebPart extends BaseClientSideWebPart<IInsertEdit
     <div class="row my-3">
     <div class ="col-12 d-flex">
     <label for="" class="form-label">Issues :</label>
-    <div class="w-100">
+    <div class="w-50">
     <textarea id="txtIssues" class="form-control" placeholder="" ></textarea>
     <p class="validation"style="display:none">Please Enter this Field</p></div>
     </div>
@@ -276,7 +276,7 @@ export default class InsertEditWebPart extends BaseClientSideWebPart<IInsertEdit
     <div class="row my-3"> 
     <div class ="col-12 d-flex">
     <label for="" class="form-label">Actions :</label>
-    <div class="w-100">
+    <div class="w-50">
     <textarea id="txtActions" class="form-control" placeholder="" ></textarea> 
     <p class="validation"style="display:none">Please Enter this Field</p></div>
     </div> 
@@ -292,7 +292,7 @@ export default class InsertEditWebPart extends BaseClientSideWebPart<IInsertEdit
     <div class="row my-3">
     <div id = "requirement" class ="col-12 d-flex">
     <label for="" class="form-label">Requirement :</label>
-    <div class="w-100">
+    <div class="w-50">
     <div class="d-flex w-100">
     <span ></span><input type="text" id="txtRequirement" class="form-control">
     </div> 
@@ -302,7 +302,7 @@ export default class InsertEditWebPart extends BaseClientSideWebPart<IInsertEdit
     <div class="row my-3">
     <div id = "funding" class ="col-12 d-flex">
     <label for="" class="form-label">Funding :</label>
-    <div class="w-100">
+    <div class="w-50">
     <div class="d-flex w-100">
     <span></span><input type="text" id="txtFunding" class="form-control" >
     </div> 
@@ -312,7 +312,7 @@ export default class InsertEditWebPart extends BaseClientSideWebPart<IInsertEdit
     <div class="row my-3">
     <div id = "strategy" class ="col-12 d-flex">
     <label for="" class="form-label">Strategy :</label>
-    <div class="w-100">
+    <div class="w-50">
     <div class="d-flex w-100">
     <span></span><input type="text" id="txtStrategy" class="form-control" >
     </div> 
@@ -322,7 +322,7 @@ export default class InsertEditWebPart extends BaseClientSideWebPart<IInsertEdit
     <div class="row my-3">
     <div id = "schedule" class ="col-12 d-flex">
     <label for="" class="form-label">Schedule :</label>  
-    <div class="w-100">
+    <div class="w-50">
     <div class="d-flex w-100">
     <span></span><input type="text" id="txtSchedule" class="form-control" >
     </div> 
