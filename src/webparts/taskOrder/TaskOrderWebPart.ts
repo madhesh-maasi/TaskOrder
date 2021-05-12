@@ -47,6 +47,9 @@ export default class TaskOrderWebPart extends BaseClientSideWebPart<ITaskOrderWe
 <img class="loader-spin"/>
 </span>
       <div class="landing-page">
+      <video autoplay muted loop>
+    <source src="https://dottndynamics.sharepoint.com/sites/TaskOrder/Shared%20Documents/Background%20Video.mp4" type="video/mp4" />
+  </video>
       <div class="header">
       <div class="logo bg-primary">Logo</div>     
       <div class="menu">
@@ -56,11 +59,14 @@ export default class TaskOrderWebPart extends BaseClientSideWebPart<ITaskOrderWe
       <div class="main-content">       
       <h2>Task Order</h2>
       <div class="section-btns d-flex"> 
-      <div class="search-section bg-primary">
+      <div class="search-section border bg-primary">
       <input type="text" class="search-input" id="tasknum" placeholder="Task Order Number" />
       </div>
       <div class="create-task-btn">
-      <button class="btn btn-sm btn-secondary border border-primary addtaskorder">Create New Task Order</button>
+      <button class="btn btn-sm btn-primary border border-primary addtaskorder">Create New Task Order</button>
+      </div>
+      <div class="task-order-btn">
+      <button class="btn btn-sm btn-secondary border border-primary taskorder">Task Order List</button>
       </div>
       </div>
       </div>
@@ -73,7 +79,7 @@ export default class TaskOrderWebPart extends BaseClientSideWebPart<ITaskOrderWe
       <label>Task Order Title</label><label style="padding-left:25px">:</label><label class="value" id="Taskordertitle"></label>
       </div>
       <div class="track-num-sec d-flex justify-content-start">
-      <label>Tracking Number</label><label style="padding-left:10px">:</label><label class="value" id="TrackingNumber"></label>
+      <label>Tracking Number</label><label style="padding-left:13px">:</label><label class="value" id="TrackingNumber"></label>
       <div class="Edit">
       </div>
       </div>
@@ -95,7 +101,7 @@ export default class TaskOrderWebPart extends BaseClientSideWebPart<ITaskOrderWe
       <div class="form-task-view">
       <div class="row my-3">
     <div class ="col-12 d-flex align-items-center">
-    <label for="" class="form-label">Customer</label>
+    <label for="" class="form-label-view">Customer</label>
     <label class="lblpadding">:</label>
     <div class="d-flex w-100" id="Customer">
     </div> 
@@ -103,7 +109,7 @@ export default class TaskOrderWebPart extends BaseClientSideWebPart<ITaskOrderWe
     </div>
     <div class="row my-3">
     <div class ="col-12 d-flex align-items-center">
-    <label for="" class="form-label">Scope</label>
+    <label for="" class="form-label-view">Scope</label>
     <label class="lblpadding">:</label>
     <div class="d-flex w-100" id="Scope">
     </div> 
@@ -111,7 +117,7 @@ export default class TaskOrderWebPart extends BaseClientSideWebPart<ITaskOrderWe
     </div>
     <div class="row my-3">
     <div class ="col-12 d-flex align-items-center">
-    <label for="" class="form-label">Stakeholder</label>
+    <label for="" class="form-label-view">Stakeholder</label>
     <label class="lblpadding">:</label>
     <div class="d-flex w-100" id="Stakeholder">
     </div> 
@@ -119,7 +125,7 @@ export default class TaskOrderWebPart extends BaseClientSideWebPart<ITaskOrderWe
     </div>
     <div class="row my-3">
     <div class ="col-12 d-flex align-items-center">
-    <label for="" class="form-label">Office</label>
+    <label for="" class="form-label-view">Office</label>
     <label class="lblpadding">:</label>
     <div class="d-flex w-100" id="Office">
     </div> 
@@ -127,7 +133,7 @@ export default class TaskOrderWebPart extends BaseClientSideWebPart<ITaskOrderWe
     </div>
     <div class="row my-3">
     <div class ="col-12 d-flex align-items-center">
-    <label for="" class="form-label">Predecessor</label>
+    <label for="" class="form-label-view">Predecessor</label>
     <label class="lblpadding">:</label>
     <div class="d-flex w-100" id="Predecessor">
     </div> 
@@ -135,7 +141,7 @@ export default class TaskOrderWebPart extends BaseClientSideWebPart<ITaskOrderWe
     </div>
     <div class="row my-3">
     <div class ="col-12 d-flex align-items-center">
-    <label for="" class="form-label">Lifecycle Value</label>
+    <label for="" class="form-label-view">Lifecycle Value</label>
     <label class="lblpadding">:</label>
     <div class="d-flex w-100" id="LifecycleValue">
     </div>
@@ -143,7 +149,7 @@ export default class TaskOrderWebPart extends BaseClientSideWebPart<ITaskOrderWe
     </div>
     <div class="row my-3">
     <div class ="col-12 d-flex align-items-center">
-    <label for="" class="form-label">Source Selection</label>
+    <label for="" class="form-label-view">Source Selection</label>
     <label class="lblpadding">:</label>
     <div class="d-flex w-100" id="SourceSelection">
     </div> 
@@ -151,7 +157,7 @@ export default class TaskOrderWebPart extends BaseClientSideWebPart<ITaskOrderWe
     </div>
     <div class="row my-3">
     <div class ="col-12 d-flex align-items-center">
-    <label for="" class="form-label">Task Order type</label>
+    <label for="" class="form-label-view">Task Order type</label>
     <label class="lblpadding">:</label>
     <div class="d-flex w-100" id="TaskOrdertype">
     </div> 
@@ -223,6 +229,9 @@ export default class TaskOrderWebPart extends BaseClientSideWebPart<ITaskOrderWe
     });
     $(document).on('click', '.addtaskorder', function () {
       location.href = `${siteURL}/SitePages/AddTaskOrder.aspx`;
+    });
+    $(document).on('click', '.taskorder', function () {
+      location.href = `${siteURL}/Lists/TaskOrder/AllItems.aspx`;
     });
   }
 
@@ -314,7 +323,7 @@ async function getTaskOrderList(TrackNum) {
    <tr><th>Convenes</th><td>${new Date(item[0].ConvenesTargetDate).toLocaleDateString()}</td><td>${new Date(item[0].ConvenesUpdatedTarget).toLocaleDateString()}</td><td>${new Date(item[0].ConvenesActualDate).toLocaleDateString()}</td></tr>
    <tr><th>Initial Submit</th><td>${new Date(item[0].InitialSubmitTargetDate).toLocaleDateString()}</td><td>${new Date(item[0].InitialSubmitUpdatedTarget).toLocaleDateString()}</td><td>${new Date(item[0].InitialSubmitActualDate).toLocaleDateString()}</td></tr>
    <tr><th>Final Submit</th><td>${new Date(item[0].FinalSubmitTargetDate).toLocaleDateString()}</td><td>${new Date(item[0].FinalSubmitUpdatedTarget).toLocaleDateString()}</td><td>${new Date(item[0].FinalSubmitActualDate).toLocaleDateString()}</td></tr>
-   <tr><th>Award release</th><td>${new Date(item[0].AwardReleaseTargetDate).toLocaleDateString()}</td><td>${new Date(item[0].AwardReleaseUpdatedTarget).toLocaleDateString()}</td><td>${new Date(item[0].AwardReleaseActualDate).toLocaleDateString()}</td></tr>`;
+   <tr><th>Award Release</th><td>${new Date(item[0].AwardReleaseTargetDate).toLocaleDateString()}</td><td>${new Date(item[0].AwardReleaseUpdatedTarget).toLocaleDateString()}</td><td>${new Date(item[0].AwardReleaseActualDate).toLocaleDateString()}</td></tr>`;
 
     Status=item[0].Status;
     if(Status!=null)
@@ -362,7 +371,7 @@ async function getTaskOrderList(TrackNum) {
     else
     Schedule=" ";
 
-    htmlfortbodyassessmentrisk = `<tr><td width="40px" style="background:${item[0].RequirementStatus}"></td><th>Requiremnets</th><td>${Requirement}</td></tr>
+    htmlfortbodyassessmentrisk = `<tr><td width="40px" style="background:${item[0].RequirementStatus}"></td><th>Requirement</th><td>${Requirement}</td></tr>
    <tr><td width="40px" style="background:${item[0].FundingStatus}"></td><th>Funding</th><td>${Funding}</td></tr>
    <tr><td width="40px" style="background:${item[0].StrategyStatus}"></td><th>Strategy</th><td>${Strategy}</td></tr>
    <tr><td width="40px" style="background:${item[0].ScheduleStatus}"></td><th>Schedule</th><td>${Schedule}</td></tr>`;
